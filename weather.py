@@ -37,7 +37,7 @@ def get_weather_data(city_list):
 
     return all_weather_data
 
-data = weather_data(cities)
+data = get_weather_data(cities)
 df = pd.DataFrame(data)
 
 print(df)
