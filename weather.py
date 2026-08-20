@@ -41,8 +41,12 @@ data = get_weather_data(cities)
 df = pd.DataFrame(data)
 
 print(df)
+
+output_dir = "output"
+os.makedirs(output_dir, exist_ok=True)
+
 timestamp = datetime.now().strftime("%d-%m-%Y")
-filename = f"weather_report_{timestamp}.csv"
+filename = os.path.join(output_dir, f"weather_report_{timestamp}.csv")
 
 df.to_csv(filename, index=False)
 print(f"Weather report saved as {filename}")
