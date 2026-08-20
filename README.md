@@ -167,87 +167,6 @@ weather.py
        output/*.csv
 ```
 
-## Running the Image on Another Computer
-
-The Docker image can be distributed using Docker Hub or by exporting it as a `.tar` file.
-
-### Using Docker Hub
-
-Tag the image:
-
-```bash
-docker tag weather-scraper YOUR_DOCKERHUB_USERNAME/weather-scraper:latest
-```
-
-Login to Docker Hub:
-
-```bash
-docker login
-```
-
-Push the image:
-
-```bash
-docker push YOUR_DOCKERHUB_USERNAME/weather-scraper:latest
-```
-
-On another computer, pull the image:
-
-```bash
-docker pull YOUR_DOCKERHUB_USERNAME/weather-scraper:latest
-```
-
-Create the `.env` file on the second computer:
-
-```env
-api_key=YOUR_OPENWEATHERMAP_API_KEY
-```
-
-Then run:
-
-```powershell
-docker run --rm --env-file .env -v "${PWD}\output:/app/output" YOUR_DOCKERHUB_USERNAME/weather-scraper:latest
-```
-
-### Using a TAR File
-
-Export the Docker image:
-
-```bash
-docker save -o weather-scraper.tar weather-scraper:latest
-```
-
-Copy the `weather-scraper.tar` file to another computer.
-
-Load it:
-
-```bash
-docker load -i weather-scraper.tar
-```
-
-Verify:
-
-```bash
-docker images
-```
-
-Run:
-
-```powershell
-docker run --rm --env-file .env -v "${PWD}\output:/app/output" weather-scraper
-```
-
-## Output
-
-The application generates a CSV report containing the weather data returned by the OpenWeatherMap API.
-
-Example:
-
-```text
-output/
-└── weather_report_19-08-2026.csv
-```
-
 ## Security
 
 The OpenWeatherMap API key is stored in an environment variable rather than being hard-coded into the Python source code.
@@ -262,21 +181,6 @@ __pycache__/
 *.pyc
 output/
 ```
-
-## Future Improvements
-
-Possible improvements include:
-
-* Add logging instead of using `print()`
-* Add API retry and timeout handling
-* Store raw API responses separately
-* Schedule automatic data collection
-* Upload generated data to AWS S3
-* Add Docker Compose
-* Add Airflow orchestration
-* Add database storage
-* Add automated testing
-* Add CI/CD using GitHub Actions
 
 ## Author
 
